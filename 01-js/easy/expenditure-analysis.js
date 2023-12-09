@@ -14,7 +14,47 @@
 */
 
 function calculateTotalSpentByCategory(transactions) {
-  return [];
+  let spendingMap = {};
+  for(let i=0; i<transactions.length; i++){
+    let transaction = transactions[i];
+    if(!spendingMap.hasOwnProperty(transaction.category)){
+      spendingMap[transaction.category] = transaction.price;
+    } else {
+      spendingMap[transaction.category] += transaction.price;
+    }
+  }
+  let result = Object.keys(spendingMap).map((category)=>({
+      category : category,
+      totalSpent : spendingMap[category]
+  }))
+  
+ return result
 }
+
+const test = calculateTotalSpentByCategory([
+  {
+    id: 1,
+    timestamp: 1656076800000,
+    price: 10,
+    category: "Food",
+    itemName: "Pizza",
+  },
+  {
+    id: 2,
+    timestamp: 1656076800000,
+    price: 100,
+    category: "Food",
+    itemName: "Pizza",
+  },
+  {
+    id: 3,
+    timestamp: 1656076800000,
+    price: 100,
+    category: "Date",
+    itemName: "Pizza",
+  },
+]);
+
+console.log(test);
 
 module.exports = calculateTotalSpentByCategory;
