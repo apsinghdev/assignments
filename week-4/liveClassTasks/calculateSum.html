@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Create Sum Project</title>
+  </head>
+  <body>
+    <input id="input1" type="number" />
+    <br />
+    <br />
+    <br />
+    <input id="input2" type="number" />
+    <br />
+    <br />
+    <br />
+    <button onclick="createSum()">Calculate Sum</button>
+    <br />
+    <br />
+    <br />
+    <div id="result"></div>
+    <script>
+      function createSum() {
+        let sum;
+        const firstInput = document.getElementById("input1").value;
+        const secondInput = document.getElementById("input2").value;
+        const resultOutput = document.createElement("div")
+        const resultElement = document.getElementById("result");
+        sum = parseInt(firstInput) + parseInt(secondInput);
+        console.log(sum);
+        resultOutput.innerHTML = `Sum is ${sum}`;
+        resultElement.appendChild(resultOutput);
+
+    
+      }
+    </script>
+  </body>
+</html>
+
+
