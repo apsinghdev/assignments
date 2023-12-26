@@ -1,0 +1,50 @@
+
+<!-- DEBOUNCING = waiting narrowly for the user to complete his/her Input reducing the unnecessary calls to the server -->
+<!-- THROTTLING = making sure a function is getting executed once in a specified time, so that its not called too frequently improving the optimization and rate limiting -->
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Create Sum Project</title>
+  </head>
+  <body>
+    <input id="input1" type="number" oninput="debounceDiv()" />
+    <br />
+    <br />
+    <br />
+    <input id="input2" type="number" oninput="debounceDiv()" />
+    <br />
+    <br />
+    <br />
+    <!-- <button onclick="createSum()">Calculate Sum</button> -->
+    <br />
+    <br />
+    <br />
+    <div id="result"></div>
+    <script>
+      let timeout;
+      function debounceDiv() {
+        clearTimeout(timeout);
+        timeout = setTimeout(() => {
+          createSum();
+        }, 1000);
+        
+      }
+      async function createSum() {
+        const a = document.getElementById("input1").value;
+        const b = document.getElementById("input2").value;
+        const resultOutput = document.createElement("div");
+        const resultElement = document.getElementById("result");
+        const response = await fetch(
+          `https://sum-server.100xdevs.com/sum?a=${a}&b=${b}`
+        );
+        if (!response.ok) {
+          throw new Error(`HTTP error ! status:${response.status}`);
+        }
+        const sum = await response.json();
+        resultOutput.innerHTML = `Sum is ${sum}`;
+        resultElement.appendChild(resultOutput);
+      }
+    </script>
+  </body>
+</html>
