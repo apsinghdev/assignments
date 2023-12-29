@@ -1,1 +1,45 @@
-<!-- create a TODO application using DOM manipulation -->
+<!-- 1. create a TODO application using DOM manipulation -->
+<!DOCTYPE html>
+<html>
+    <head>
+<title>TODO Application ( USING DOM )</title>
+    </head>
+    <body>
+<input id="todo" placeholder="todo name"/>
+<br/>
+<br/>
+<input id="description" placeholder="description"/>
+<br/>
+<br/>
+<button onclick=addTodo()>Add todo</button>
+<br/>
+<br/>
+<div id="result"></div>
+<script>
+   
+function addTodo(){
+     const todoName = document.getElementById("todo").value;
+     const todoNameParagraph = document.createElement("p");
+     todoNameParagraph.innerHTML = `${todoName}`;
+
+    const description = document.getElementById("description").value;
+    const descriptionParagraph = document.createElement("p")
+    descriptionParagraph.innerHTML = `${description}`;
+
+    const markButton = document.createElement("button");
+    const todoContainer = document.createElement("div");
+    markButton.innerHTML = "Mark as done"
+
+    const resultOutput = document.getElementById("result");
+    todoContainer.appendChild(todoNameParagraph);
+    todoContainer.appendChild(descriptionParagraph);
+    todoContainer.appendChild(markButton);
+    resultOutput.appendChild(todoContainer); 
+    markButton.addEventListener("click",()=>{
+        markButton.innerHTML = "Done !"
+    })
+    return resultOutput;
+}
+</script>
+    </body>
+</html>
