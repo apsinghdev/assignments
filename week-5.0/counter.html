@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Counter</title>
+  </head>
+  <body>
+    <div id="btn-div"></div>
+    <script>
+      const state = {
+        count: 0,
+      };
+
+      function createBtn(count) {
+        const button = document.createElement("button");
+        button.innerHTML = `count ${count}`;
+        button.onclick = buttonOnClick;
+        return button;
+      }
+
+      function buttonOnClick() {
+        state.count += 1;
+        renderButton();
+      }
+      function renderButton() {
+        const buttonDiv = document.getElementById("btn-div");
+        buttonDiv.innerHTML = "";
+        const button = createBtn(state.count);
+        buttonDiv.appendChild(button);
+      }
+      renderButton();
+    </script>
+  </body>
+</html>
