@@ -2,6 +2,7 @@ const express = require("express");
 const app = express();
 const port = 4000;
 const { createTodo, updateTodo } = require("./types");
+const { todo } = require("./db");
 
 app.use(express.json());
 
@@ -23,7 +24,15 @@ function validateUserId(req,res,next){
  }
 }
 
-app.post("/todo", validateUserData, (req, res) => {});
+app.post("/todo", validateUserData, async (req, res) => {
+    await todo.create({
+        title: req.body.title,
+        description: req.body.description,
+    })
+    res.json({msg:'todo created'});
+});
+
+
 
 app.get("/todos", validateUserId,(req, res) => {});
 
