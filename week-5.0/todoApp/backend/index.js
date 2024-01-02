@@ -14,11 +14,19 @@ function validateUserData(req, res, next) {
   }
 }
 
+function validateUserId(req,res,next){
+ try{
+    updateTodo.safeParse(req.body);
+    next();
+ } catch(error){
+    res.status(400).json({msg:"Incorrect ID"})
+ }
+}
+
 app.post("/todo", validateUserData, (req, res) => {});
 
-app.get("/todos", (req, res) => {});
+app.get("/todos", validateUserId,(req, res) => {});
 
 app.put("/completed", (req, res) => {});
-
 
 app.listen(`Server is running on ${port}`);
