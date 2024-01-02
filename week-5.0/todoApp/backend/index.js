@@ -15,27 +15,33 @@ function validateUserData(req, res, next) {
   }
 }
 
-function validateUserId(req,res,next){
- try{
+function validateUserId(req, res, next) {
+  try {
     updateTodo.safeParse(req.body);
     next();
- } catch(error){
-    res.status(400).json({msg:"Incorrect ID"})
- }
+  } catch (error) {
+    res.status(400).json({ msg: "Incorrect ID" });
+  }
 }
 
 app.post("/todo", validateUserData, async (req, res) => {
-    await todo.create({
-        title: req.body.title,
-        description: req.body.description,
-    })
-    res.json({msg:'todo created'});
+  await todo.create({
+    title: req.body.title,
+    description: req.body.description,
+    completed: false,
+  });
+  res.json({ msg: "todo created" });
 });
 
+app.get("/todos", async (req, res) => {
+  try {
+    const todos = await todo.find({});
+    res.json(todos);
+  } catch (error) {
+    res.status(500).json({ error: err.message });
+  }
+});
 
-
-app.get("/todos", validateUserId,(req, res) => {});
-
-app.put("/completed", (req, res) => {});
+app.put("/completed", validateUserId, (req, res) => {});
 
 app.listen(`Server is running on ${port}`);
