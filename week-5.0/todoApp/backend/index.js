@@ -42,6 +42,12 @@ app.get("/todos", async (req, res) => {
   }
 });
 
-app.put("/completed", validateUserId, (req, res) => {});
+app.put("/completed", validateUserId, async (req, res) => {
+  // get id using query params
+  const id = req.body.id;
+  // update the value of completed to true
+  await todo.updateOne({_id:id},{completed: true});
+  res.json({msg:'todo has been marked as true'})
+});
 
 app.listen(`Server is running on ${port}`);
