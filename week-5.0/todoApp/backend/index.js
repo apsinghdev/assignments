@@ -50,4 +50,6 @@ app.put("/completed", validateUserId, async (req, res) => {
   res.json({msg:'todo has been marked as true'})
 });
 
-app.listen(`Server is running on ${port}`);
+app.listen(port,()=>{
+    console.log(`Server is running on ${port}`);
+});

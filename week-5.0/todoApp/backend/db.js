@@ -1,8 +1,7 @@
 const mongoose = require("mongoose");
 const { Schema } = mongoose;
-mongoose.connect(
-  "mongodb+srv://ajeet:ajeet@mern-estate.euetct6.mongodb.net/?retryWrites=true&w=majority"
-);
+require("dotenv").config();
+mongoose.connect(process.env.MONGODB_URL);
 
 const todoSchema = new Schema({
   title: String,
