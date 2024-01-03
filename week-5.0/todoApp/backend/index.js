@@ -3,8 +3,10 @@ const app = express();
 const port = 4000;
 const { createTodo, updateTodo } = require("./types");
 const { todo } = require("./db");
+const cors = require('cors')
 
 app.use(express.json());
+app.use(cors());
 
 function validateUserData(req, res, next) {
   try {
