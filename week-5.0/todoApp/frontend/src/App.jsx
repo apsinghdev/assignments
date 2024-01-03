@@ -8,7 +8,7 @@ function App() {
   return (
     <div>
       <CreateTodo></CreateTodo>
-      <RenderTodo></RenderTodo>
+      <RenderTodo todos={[{title: "gym", description: 'do workout'}]}></RenderTodo>
     </div>
   )
 }
