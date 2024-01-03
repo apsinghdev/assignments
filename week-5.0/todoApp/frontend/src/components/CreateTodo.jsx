@@ -1,3 +1,5 @@
+// this component creates the todos 
+
 export function CreateTodo(){
     return (
       <>
