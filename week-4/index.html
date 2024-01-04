@@ -7,8 +7,17 @@
     let todoState = [];
     let oldTodoState = [];
 
-    function addTodoToDom() {
-      
+    function addTodoToDom([todo]) {
+// console.log(todo);
+      console.log(todo.title)
+      const todoDiv = document.getElementById("todos");
+      const todoTitle = document.createElement('p');
+      todoTitle.innerHTML = `${todo.title}`;
+      const todoDesc = document.createElement('p');
+      todoDesc.innerHTML = `${todo.description}`;
+      todoDiv.appendChild(todoTitle);
+      todoDiv.appendChild(todoDesc);
+      return todoDiv;
     }
 
     function removeTodoFromDom(todo) {
@@ -23,12 +32,48 @@
       // calculate the diff b/w newTodos and oldTodos.
       // More specifically, find out what todos are - 
       // 1. added
-      // 2. deleted
-      // 3. updated
-      const added = [];
+      
+      let added = [];
       const deleted = [];
       const updated = [];
-      // calculate these 3 arrays
+      
+      //   if(newTodos.length > oldTodoState.length){
+      //   for(let i=0; i<newTodos.length; i++){
+      //     added.push(newTodos[i]);
+      //     console.log('added cond')
+      //   }
+      // }
+
+      const addedElements = newTodos.filter((todo)=>{
+        !oldTodoState.some((oldTodo)=>{todo.id === oldTodo.id});
+      })
+      
+      added = addedElements;
+       // 2. deleted
+      for(let i=0; i<oldTodoState.length; i++){
+        if(!newTodos.includes(oldTodoState[i])){
+          deleted.push(oldTodoState[i])
+        }
+      }
+      
+       // 3. updated
+      newTodos.map((todo, index)=>{
+        if(todo !== oldTodoState[index]){
+          updated.push(todo)
+        }
+      })
+     
+
+     if(added.length){
+addTodoToDom(added);
+     } if (deleted.length){
+removeTodoFromDom(deleted);
+     } if (updated.length) {
+updateTodoInDom(oldTodoState, updated);
+     }
+ 
+     console.log(added);
+      // calculate these 3u arrays
       // call addTodo, removeTodo, updateTodo functions on each of the
       // elements
       oldTodoState = newTodos;
@@ -42,6 +87,7 @@
         description: description,
         id: globalId++,
       })
+      console.log(todoState);
       updateState(todoState);
     }
   </script>
@@ -50,7 +96,7 @@
 <body>
   <input type="text" id="title" placeholder="Todo title"></input> <br /><br />
   <input type="text" id="description" placeholder="Todo description"></input> <br /><br />
-  <button onclick="addTodo()">Add todo</button>
+  <button onclick='addTodo()'>Add todo</button>
   <br /> <br />
 
   <div id="todos">
