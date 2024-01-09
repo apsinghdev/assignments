@@ -1,4 +1,4 @@
-import { useState, memo } from 'react'
+import { useState} from 'react'
 
 // create a project that has a button and two titles below. one title represents a random number that gets generated on clicking the button and another title represents a simple name
 
