@@ -1,35 +1,35 @@
 import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+
+// create a project that has a button and two titles below. one title represents a random number that gets generated on clicking the button and another title represents a simple name
+
+// the problem here is that each time the state of the number is changing, the above button and name para elements also re-rendering and in react the less the re renders the better. 
+// so in order to minimize the re renders I can either push the state down to that element that needs to be re rendered or i can use memo. 
+
+// SOLUTION-1: pushing the state down
 
 function App() {
-  const [count, setCount] = useState(0)
+  
 
   return (
     <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+    <HeaderAndButton></HeaderAndButton>
+    <p>my name is bhupendra jogi</p>
     </>
   )
+}
+
+function HeaderAndButton(){
+  const [ number, setNumber] = useState(0);
+  return (
+    <>
+      <button
+        onClick={() => {
+          setNumber(Math.random());
+        }}
+      >click here</button>
+      <p>the random number is {number}</p>
+    </>
+  );
 }
 
 export default App
