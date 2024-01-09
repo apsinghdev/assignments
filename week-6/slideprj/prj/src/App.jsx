@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, memo } from 'react'
 
 // create a project that has a button and two titles below. one title represents a random number that gets generated on clicking the button and another title represents a simple name
 
@@ -7,29 +7,59 @@ import { useState } from 'react'
 
 // SOLUTION-1: pushing the state down
 
-function App() {
+// function App() {
   
 
-  return (
-    <>
-    <HeaderAndButton></HeaderAndButton>
-    <p>my name is bhupendra jogi</p>
-    </>
-  )
-}
+//   return (
+//     <>
+//     <HeaderAndButton></HeaderAndButton>
+//     <p>my name is bhupendra jogi</p>
+//     </>
+//   )
+// }
 
-function HeaderAndButton(){
-  const [ number, setNumber] = useState(0);
+// function HeaderAndButton(){
+//   const [ number, setNumber] = useState(0);
+//   return (
+//     <>
+//       <button
+//         onClick={() => {
+//           setNumber(Math.random());
+//         }}
+//       >click here</button>
+//       <p>the random number is {number}</p>
+//     </>
+//   );
+// }
+
+// export default App
+
+// SOLUTION-2: using memo
+import { memo } from "react";
+
+function App() {
+  const [firstTitle, setFirstTitle] = useState("my name is harkirat");
+
+  function changeTitle() {
+    setFirstTitle("My name is " + Math.random());
+  }
+
   return (
-    <>
-      <button
-        onClick={() => {
-          setNumber(Math.random());
-        }}
-      >click here</button>
-      <p>the random number is {number}</p>
-    </>
+    <div>
+      <button onClick={changeTitle}>Click me to change the title</button>
+      <Header title={firstTitle} />
+      <br />
+      <Header title="My name is raman" />
+      <Header title="My name is raman" />
+      <Header title="My name is raman" />
+      <Header title="My name is raman" />
+    </div>
   );
 }
 
-export default App
+const Header = memo(function ({ title }) {
+  return <div>{title}</div>;
+});
+
+export default App;
+
